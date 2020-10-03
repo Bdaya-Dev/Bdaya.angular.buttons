@@ -2,5 +2,170 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "circular-buttons": {
+      "projectType": "library",
+      "root": "projects/circular-buttons",
+      "sourceRoot": "projects/circular-buttons/src",
+      "prefix": "bdaya",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/circular-buttons/tsconfig.lib.json",
+            "project": "projects/circular-buttons/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/circular-buttons/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/circular-buttons/src/test.ts",
+            "tsConfig": "projects/circular-buttons/tsconfig.spec.json",
+            "karmaConfig": "projects/circular-buttons/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/circular-buttons/tsconfig.lib.json",
+              "projects/circular-buttons/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "bdaya-buttons-example": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/bdaya-buttons-example",
+      "sourceRoot": "projects/bdaya-buttons-example/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/bdaya-buttons-example",
+            "index": "projects/bdaya-buttons-example/src/index.html",
+            "main": "projects/bdaya-buttons-example/src/main.ts",
+            "polyfills": "projects/bdaya-buttons-example/src/polyfills.ts",
+            "tsConfig": "projects/bdaya-buttons-example/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/bdaya-buttons-example/src/favicon.ico",
+              "projects/bdaya-buttons-example/src/assets"
+            ],
+            "styles": [
+              "projects/bdaya-buttons-example/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/bdaya-buttons-example/src/environments/environment.ts",
+                  "with": "projects/bdaya-buttons-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "bdaya-buttons-example:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "bdaya-buttons-example:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "bdaya-buttons-example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/bdaya-buttons-example/src/test.ts",
+            "polyfills": "projects/bdaya-buttons-example/src/polyfills.ts",
+            "tsConfig": "projects/bdaya-buttons-example/tsconfig.spec.json",
+            "karmaConfig": "projects/bdaya-buttons-example/karma.conf.js",
+            "assets": [
+              "projects/bdaya-buttons-example/src/favicon.ico",
+              "projects/bdaya-buttons-example/src/assets"
+            ],
+            "styles": [
+              "projects/bdaya-buttons-example/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/bdaya-buttons-example/tsconfig.app.json",
+              "projects/bdaya-buttons-example/tsconfig.spec.json",
+              "projects/bdaya-buttons-example/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/bdaya-buttons-example/e2e/protractor.conf.js",
+            "devServerTarget": "bdaya-buttons-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "bdaya-buttons-example:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": false
+  },
+  "defaultProject": "circular-buttons"
 }
