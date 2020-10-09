@@ -1,11 +1,19 @@
 {
   "name": "@bdaya-dev/bdaya.angular.buttons",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^10.1.4",
     "@angular/core": "^10.1.4"
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "description": "Bdaya Custom Buttons",
+  "author": {
+    "name": "Ahmed Khalil",
+    "email": "Progeng_Ahmed_Khalil@outlook.com",
+    "url": "https://ahmedkhalil777.github.io/AhmedKhalil777"
+  },
+  "keywords": ["Buttons", "Angular Buttons", "Bdaya" ,  "Ng Buttons", "Bdaya Buttons"],
+  
 }
